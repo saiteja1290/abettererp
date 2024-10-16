@@ -74,7 +74,7 @@ export default function Dashboard() {
     ]
 
     return (
-        <Card className="flex flex-col bg-black border-black">
+        <Card className="flex flex-col bg-baground border-background">
             <CardHeader className="items-center pb-0">
                 {/* <CardTitle>Radial Chart - Text</CardTitle> */}
                 <CardDescription>Attendance Overview</CardDescription>
@@ -102,7 +102,7 @@ export default function Dashboard() {
                             dataKey="visitors"
                             background
                             cornerRadius={10}
-                            fill="green"  // Set the color to green
+                            fill="white"  // Set the color to green
                         />
                         <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
                             <Label

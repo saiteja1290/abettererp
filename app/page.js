@@ -30,8 +30,8 @@ export default function Home() {
   return (
     <main className="flex h-screen bg-black text-white">
       {/* Left partition - Hidden on small screens */}
-      <div className="hidden md:flex w-1/2 bg-gray-700 items-center justify-center">
-        <h1 className="text-4xl font-bold text-gray-300">Attendance App</h1>
+      <div className="hidden md:flex w-1/2 bg-background items-center justify-center">
+        <h1 className="text-4xl font-bold text-gray-300">A Better ERP</h1>
       </div>
 
       {/* Right partition - Full width on small screens */}
