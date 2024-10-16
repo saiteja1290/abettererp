@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { TrendingUp } from "lucide-react"
 import {
     Label,
     PolarGrid,
@@ -16,7 +15,6 @@ import {
     CardDescription,
     CardFooter,
     CardHeader,
-    CardTitle,
 } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
@@ -35,6 +33,9 @@ const chartConfig = {
 export default function Dashboard() {
     const [attendance, setAttendance] = useState(null)
     const [rollNumber, setRollNumber] = useState(null)
+    const [currentClasses, setCurrentClasses] = useState(0)
+    const [bunkableClasses, setBunkableClasses] = useState(0)
+    const [classesheld, setClassesHeld] = useState(0)
     const router = useRouter()
 
     useEffect(() => {
@@ -47,15 +48,38 @@ export default function Dashboard() {
         }
         setRollNumber(storedRollNumber)
 
-        // Fetch attendance data
+        // Fetch attendance and current classes data
         fetch(`/api/attendance?rollNumber=${storedRollNumber}`)
             .then(res => res.json())
-            .then(data => setAttendance(data.attendancePercentage))
+            .then(data => {
+                setAttendance(data.attendancePercentage)
+                setCurrentClasses(data.currentclasses)
+                calculateBunkableClasses(data.attendancePercentage, data.currentclasses, data.classesheld)
+                setClassesHeld(data.classesheld)
+            })
             .catch(error => {
                 console.error('Error fetching attendance:', error)
                 setAttendance(null)
             })
     }, [router])
+
+    // Function to calculate bunkable classes based on attendance percentage
+    const calculateBunkableClasses = (attendancePercentage, currentClasses, classesheld) => {
+        let bunkable;
+
+        if (attendancePercentage < 75) {
+            // Calculate classes you may bunk if attendance is below 75%
+            bunkable = 4.16 * ((0.76 * parseInt(classesheld)) - currentClasses)
+        }
+        else if (attendancePercentage === 75) {
+            bunkable = 0
+        }
+        else {
+            // Calculate classes you may bunk if attendance is above 75%
+            bunkable = -4.16 * ((0.76 * parseInt(classesheld)) - currentClasses)
+        }
+        setBunkableClasses(bunkable)
+    }
 
     const handleLogout = () => {
         localStorage.removeItem('rollNumber')
@@ -76,8 +100,8 @@ export default function Dashboard() {
     return (
         <Card className="flex flex-col bg-baground border-background">
             <CardHeader className="items-center pb-0">
-                {/* <CardTitle>Radial Chart - Text</CardTitle> */}
                 <CardDescription>Attendance Overview</CardDescription>
+                <CardDescription>{rollNumber}</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
@@ -102,7 +126,7 @@ export default function Dashboard() {
                             dataKey="visitors"
                             background
                             cornerRadius={10}
-                            fill="white"  // Set the color to green
+                            fill="white"
                         />
                         <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
                             <Label
@@ -139,11 +163,26 @@ export default function Dashboard() {
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col gap-2 text-sm">
-                <div className="flex items-center gap-2 font-medium leading-none">
-                    {/* Trending up by 5.2% this month <TrendingUp className="h-4 w-4" /> */}
-                </div>
                 <div className="leading-none text-muted-foreground">
                     Showing your attendance data
+                </div>
+                {attendance < 75 ? (
+                    <div className="leading-none text-muted-foreground">
+                        Classes you need to attend: {bunkableClasses.toFixed(2)}
+                    </div>
+                ) : (
+                    <div className="leading-none text-muted-foreground">
+                        Classes you can bunk: {bunkableClasses.toFixed(2)}
+                    </div>
+                )}
+
+                <div className="leading-none text-muted-foreground">
+                    Attended Classes: {currentClasses}
+                    {/* Current Classes: {currentClasses} */}
+                </div>
+                <div className="leading-none text-muted-foreground">
+                    Classes Held: {classesheld}
+                    {/* Current Classes: {currentClasses} */}
                 </div>
                 <button onClick={handleLogout} className="p-2 bg-red-600 text-white rounded">
                     Logout

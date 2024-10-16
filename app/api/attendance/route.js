@@ -16,10 +16,16 @@ export async function GET(request) {
         const db = client.db(process.env.DATABASE_NAME)
         const collection = db.collection('students')
 
+        // Find student by roll number
         const student = await collection.findOne({ rollNumber })
 
         if (student) {
-            return NextResponse.json({ attendancePercentage: student.attendancePercentage }, { status: 200 })
+            // Return both attendance percentage and current classes
+            return NextResponse.json({
+                attendancePercentage: student.attendancePercentage,
+                currentclasses: student.currentclasses, // Make sure this field is available
+                classesheld: student.classesheld // Make sure this field is available
+            }, { status: 200 })
         } else {
             return NextResponse.json({ message: 'Student not found' }, { status: 404 })
         }
