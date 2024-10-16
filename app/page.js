@@ -6,18 +6,24 @@ import { useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Loader } from "react-feather" // Icon for the spinner
 
 export default function Home() {
   const [rollNumber, setRollNumber] = useState('')
+  const [loading, setLoading] = useState(false) // State to manage loading spinner
   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true) // Set loading to true when login starts
+
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ rollNumber }),
     })
+
+    setLoading(false) // Set loading to false after the response is received
 
     if (response.ok) {
       localStorage.setItem('rollNumber', rollNumber)
@@ -48,9 +54,21 @@ export default function Home() {
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
                 className="bg-black text-white border-gray-700"
+                disabled={loading} // Disable input during loading
               />
-              <Button type="submit" className="w-full bg-white text-black">
-                Login
+              <Button
+                type="submit"
+                className="w-full bg-white text-black"
+                disabled={loading} // Disable button during loading
+              >
+                {loading ? ( // Show spinner if loading is true
+                  <div className="flex items-center justify-center">
+                    <Loader className="animate-spin mr-2" size={20} />
+                    Logging in...
+                  </div>
+                ) : (
+                  'Login'
+                )}
               </Button>
             </form>
           </CardContent>
