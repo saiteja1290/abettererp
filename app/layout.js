@@ -15,6 +15,7 @@ const geistMono = localFont({
 export const metadata = {
   title: "bettererp",
   description: "A better looking ERP",
+
 };
 
 export default function RootLayout({ children }) {
