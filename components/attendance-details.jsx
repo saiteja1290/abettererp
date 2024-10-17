@@ -11,6 +11,7 @@ export default function AttendanceDetails() {
         currentClasses: 0,
         classesHeld: 0,
         bunkableClasses: 0,
+        attendancepercentage: 0
     })
     const [rollNumber, setRollNumber] = useState('')
     const router = useRouter()
@@ -78,7 +79,7 @@ export default function AttendanceDetails() {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                {attendanceData.bunkableClasses >= 0 ? "Classes You Can Bunk" : "Classes to Attend"}
+                                {attendanceData.attendancepercentage >= 75 ? "Classes You Can Bunk (for 76%)" : "Classes to Attend (for 76%)"}
                             </TableCell>
                             <TableCell className="text-right">
                                 {Math.abs(attendanceData.bunkableClasses).toFixed(2)}
