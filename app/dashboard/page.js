@@ -111,7 +111,7 @@ export default function Dashboard() {
                     <RadialBarChart
                         data={chartData}
                         startAngle={0}
-                        endAngle={250}
+                        endAngle={360 * (chartData[0].visitors / 100)}  // Dynamically calculate the end angle
                         innerRadius={80}
                         outerRadius={110}
                     >
