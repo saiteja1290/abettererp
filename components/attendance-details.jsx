@@ -79,7 +79,7 @@ export default function AttendanceDetails() {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                {attendanceData.attendancePercentage >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
+                                {attendanceData.attendancepercentage >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
                             </TableCell>
                             <TableCell className="text-right">
                                 {Math.abs(attendanceData.bunkableClasses).toFixed(0)}

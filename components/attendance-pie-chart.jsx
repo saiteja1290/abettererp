@@ -47,7 +47,7 @@ export default function AttendancePieChart() {
                     config={{
                         attendance: {
                             label: "Attendance",
-                            color: "hsl(var(--chart-1))",
+                            color: "hsl(238.7, 83.5%, 66.7%)",
                         },
                     }}
                     className="aspect-square w-full max-w-[300px] mx-auto"
