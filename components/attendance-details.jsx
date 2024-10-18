@@ -88,11 +88,6 @@ export default function AttendanceDetails() {
                     </TableBody>
                 </Table>
             </CardContent>
-            <CardFooter>
-                <Button variant="destructive" onClick={handleLogout} className="w-full">
-                    Logout
-                </Button>
-            </CardFooter>
         </Card>
     )
 }

@@ -73,30 +73,21 @@ export default function Component() {
 
     return (
         <div className="container mx-auto py-10">
-            <Card className="border-background">
-                <CardHeader>
-                    <CardTitle>Student Attendance Dashboard</CardTitle>
-                    <CardDescription>View your attendance overview and details</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <Suspense fallback={<div>Loading attendance data...</div>}>
-                        <div className="flex flex-col md:flex-row gap-8">
-                            <div className="w-full md:w-1/2 order-2 md:order-1">
-                                <AttendanceDetails
-                                    attendanceData={attendanceData}
-                                    handleLogout={handleLogout}
-                                />
-                            </div>
-                            <div className="w-auto md:w-1/2 order-1 md:order-2">
-                                <AttendancePieChart
-                                    attendance={attendanceData.attendancePercentage}
-                                    rollNumber={attendanceData.rollNumber}
-                                />
-                            </div>
-                        </div>
-                    </Suspense>
-                </CardContent>
-            </Card>
+            <div className='flex flex-col md:flex-row gap-0'>
+                <div className="w-full md:w-1/2 order-2 md:order-1">
+                    <AttendanceDetails
+                        attendanceData={attendanceData}
+                        handleLogout={handleLogout}
+                    />
+                </div>
+
+                <div className="w-auto md:w-1/2 order-1 md:order-2">
+                    <AttendancePieChart
+                        attendance={attendanceData.attendancePercentage}
+                        rollNumber={attendanceData.rollNumber}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
