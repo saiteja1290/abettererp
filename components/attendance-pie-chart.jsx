@@ -3,13 +3,39 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { PolarAngleAxis, RadialBar, RadialBarChart } from "recharts"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { ChartContainer } from "@/components/ui/chart"
+
+function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    })
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            })
+        }
+
+        window.addEventListener("resize", handleResize)
+        handleResize()
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    return windowSize
+}
 
 export default function AttendancePieChart() {
     const [attendance, setAttendance] = useState(0)
     const [rollNumber, setRollNumber] = useState('')
     const router = useRouter()
+    const windowSize = useWindowSize()
+
+    const chartSize = windowSize.width < 768 ? 250 : 300 // smaller size on mobile
 
     useEffect(() => {
         const storedRollNumber = localStorage.getItem('rollNumber')
@@ -37,12 +63,8 @@ export default function AttendancePieChart() {
     ]
 
     return (
-        <Card className="w-full max-w-md mx-auto border-background">
-            <CardHeader>
-                <CardTitle>Attendance Overview</CardTitle>
-                <CardDescription>Roll Number: {rollNumber}</CardDescription>
-            </CardHeader>
-            <CardContent>
+        <Card className="h-full border-background">
+            <CardContent className="flex items-center justify-center p-6 border-white">
                 <ChartContainer
                     config={{
                         attendance: {
@@ -50,14 +72,17 @@ export default function AttendancePieChart() {
                             color: "hsl(var(--chart-1))",
                         },
                     }}
-                    className="aspect-square w-full max-w-[300px] mx-auto"
+                    className="w-full max-w-[500px] border-white"
                 >
                     <RadialBarChart
                         data={chartData}
                         startAngle={0}
                         endAngle={360}
-                        innerRadius={80}
-                        outerRadius={110}
+                        innerRadius="60%"
+                        outerRadius="80%"
+                        barSize={40}
+                        width={chartSize}
+                        height={chartSize}
                     >
                         <PolarAngleAxis
                             type="number"
@@ -77,9 +102,9 @@ export default function AttendancePieChart() {
                             y="50%"
                             textAnchor="middle"
                             dominantBaseline="middle"
-                            className="fill-foreground text-4xl font-bold"
+                            className="fill-foreground text-2xl font-bold"
                         >
-                            {attendance.toFixed(1)}%
+                            {attendance.toFixed(2)}%
                         </text>
                     </RadialBarChart>
                 </ChartContainer>

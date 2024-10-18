@@ -45,7 +45,7 @@ export default function AttendanceDetails() {
         } else if (attendancePercentage === 75) {
             return 0
         } else {
-            return -4.16 * ((0.76 * parseInt(classesHeld)) - currentClasses)
+            return 1.31 * (currentClasses - (0.76 * parseInt(classesHeld)))
         }
     }
 
@@ -55,9 +55,9 @@ export default function AttendanceDetails() {
     }
 
     return (
-        <Card className="w-full max-w-md mx-auto border-background">
+        <Card className="h-full border-background">
             <CardHeader>
-                <CardTitle>Attendance Details (BETA)</CardTitle>
+                <CardTitle>Attendance Details</CardTitle>
                 <CardDescription>Roll Number: {rollNumber}</CardDescription>
             </CardHeader>
             <CardContent>
@@ -79,10 +79,10 @@ export default function AttendanceDetails() {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                {attendanceData.attendancepercentage >= 75 ? "Classes You Can Bunk (for 76%)" : "Classes to Attend (for 76%)"}
+                                {attendanceData.attendancePercentage >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
                             </TableCell>
                             <TableCell className="text-right">
-                                {Math.abs(attendanceData.bunkableClasses).toFixed(2)}
+                                {Math.abs(attendanceData.bunkableClasses).toFixed(0)}
                             </TableCell>
                         </TableRow>
                     </TableBody>

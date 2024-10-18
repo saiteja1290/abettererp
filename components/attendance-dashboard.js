@@ -3,7 +3,7 @@ import AttendanceDetails from './attendance-details'
 
 export default function AttendanceDashboard() {
     return (
-        <div className="space-y-8 p-8 ">
+        <div className=" ">
             <AttendancePieChart />
             <AttendanceDetails />
         </div>
