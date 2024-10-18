@@ -7,8 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader } from "react-feather"
-
-// import { Checkbox } from "@/components/ui/checkbox"
 import { Checkbox } from '@/components/ui/checkbox'
 
 export default function Home() {
@@ -61,6 +59,11 @@ export default function Home() {
                 className="bg-black text-white border-gray-700"
                 disabled={loading}
               />
+
+              {/* Message for Section Limitation */}
+              <p className="text-center text-gray-400 text-sm">
+                Available for CSE, CSM and CET only for now.
+              </p>
 
               {/* Terms and Conditions Checkbox */}
               <div className="flex items-center space-x-2">
