@@ -57,7 +57,7 @@ export default function AttendanceDetails() {
     return (
         <Card className="h-full border-background">
             <CardHeader>
-                <CardTitle>Attendance Details</CardTitle>
+                <CardTitle>Attendance Details (BETA)</CardTitle>
                 <CardDescription>Roll Number: {rollNumber}</CardDescription>
             </CardHeader>
             <CardContent>
