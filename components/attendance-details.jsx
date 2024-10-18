@@ -13,6 +13,7 @@ export default function AttendanceDetails() {
         bunkableClasses: 0,
         attendancepercentage: 0
     })
+    const [userattendance, setUserAttendance] = useState(0)
     const [rollNumber, setRollNumber] = useState('')
     const router = useRouter()
 
@@ -40,6 +41,7 @@ export default function AttendanceDetails() {
     }, [router])
 
     const calculateBunkableClasses = (attendancePercentage, currentClasses, classesHeld) => {
+        setUserAttendance(attendancePercentage)
         if (attendancePercentage < 75) {
             return 4.16 * ((0.76 * parseInt(classesHeld)) - currentClasses)
         } else if (attendancePercentage === 75) {
@@ -79,9 +81,10 @@ export default function AttendanceDetails() {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                {attendanceData.attendancepercentage >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
+                                {userattendance >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
                             </TableCell>
                             <TableCell className="text-right">
+                                {/* "Classes You Can Skip or attend for 76%" */}
                                 {Math.abs(attendanceData.bunkableClasses).toFixed(0)}
                             </TableCell>
                         </TableRow>
