@@ -24,6 +24,11 @@
   --input: 0 0% 20%;
   --ring: 0 0% 70%;
   --radius: 0.5rem;
+  .color-scale-0 { fill: #ebedf0; }
+.color-scale-1 { fill: #c6e48b; }
+.color-scale-2 { fill: #7bc96f; }
+.color-scale-3 { fill: #239a3b; }
+.color-scale-4 { fill: #196127; }
 }
 @layer base {
   :root {
@@ -89,4 +94,61 @@ body {
   pre, code {
     font-family: var(--font-geist-mono);
   }
+}
+
+
+/* HEATMAP */
+
+.heatmap-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #171717;  /* Container background color */
+  border-radius: 10px;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #9ca3af; /* Color for empty blocks */
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill:#818cf8; /* Lightest green for low attendance */
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #4f46e5; /* Mid-light green for medium attendance */
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #4338ca; /* Mid-dark green */
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #312e81; /* Darkest green for full attendance */
+}
+
+.react-calendar-heatmap .react-calendar-heatmap {
+  width: 100%; /* Ensure full-width display */
+}
+.react-calendar-heatmap .color-empty,
+.react-calendar-heatmap .color-scale-1,
+.react-calendar-heatmap .color-scale-2,
+.react-calendar-heatmap .color-scale-3,
+.react-calendar-heatmap .color-scale-4 {
+    rx: 2;  /* Border-radius for cubes */
+    ry: 2;  /* Border-radius for cubes */
+}
+.react-calendar-heatmap text {
+  font-size: 12px; /* Small font for weekday labels */
+  fill: #fff; /* White text to stand out on dark background */
+}
+.react-calendar-heatmap .react-calendar-heatmap-weekday-labels text {
+  transform: translateX(-10px); /* Move the weekday labels upwards */
+}
+
+/* Adding space between the months and the heatmap */
+.react-calendar-heatmap .react-calendar-heatmap-month-labels text {
+  transform: translateY(0px); /* Move the month labels downwards */
 }

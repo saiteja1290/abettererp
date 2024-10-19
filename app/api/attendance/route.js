@@ -24,7 +24,8 @@ export async function GET(request) {
             return NextResponse.json({
                 attendancePercentage: student.attendancePercentage,
                 currentclasses: student.currentclasses, // Make sure this field is available
-                classesheld: student.classesheld // Make sure this field is available
+                classesheld: student.classesheld, // Make sure this field is available
+                attendancedict: student.attendancedict // Make sure this field is available
             }, { status: 200 })
         } else {
             return NextResponse.json({ message: 'Student not found' }, { status: 404 })

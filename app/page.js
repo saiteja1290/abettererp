@@ -44,7 +44,7 @@ export default function Home() {
 
       {/* Right partition - Full width on small screens */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4">
-        <Card className="w-full max-w-[350px] bg-black border-gray-700">
+        <Card className="w-full max-w-[350px] bg-black border-black">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center text-white">Login</CardTitle>
           </CardHeader>
