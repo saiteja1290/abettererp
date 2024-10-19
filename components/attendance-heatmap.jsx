@@ -22,7 +22,7 @@ export default function AttendanceHeatmap({ rollNumber }) {
     }, [rollNumber]);
 
     if (!attendanceData) {
-        return <div>Loading attendance data...</div>;
+        return <div>Loading Heatmap</div>;
     }
 
     // Prepare data for the CalendarHeatmap

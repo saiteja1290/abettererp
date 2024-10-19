@@ -108,27 +108,25 @@ body {
   background-color: #171717;  /* Container background color */
   border-radius: 10px;
 }
-
 .react-calendar-heatmap .color-empty {
-  fill: #9ca3af; /* Color for empty blocks */
+  fill: #e9d5ff; /* Color for empty blocks */
 }
 
 .react-calendar-heatmap .color-scale-1 {
-  fill:#818cf8; /* Lightest green for low attendance */
+  fill:#c084fc; /* Lightest for low attendance */
 }
 
 .react-calendar-heatmap .color-scale-2 {
-  fill: #4f46e5; /* Mid-light green for medium attendance */
+  fill:#7e22ce; /* Mid-light for medium attendance */
 }
 
 .react-calendar-heatmap .color-scale-3 {
-  fill: #4338ca; /* Mid-dark green */
+  fill: #581c87; /* Mid-dark */
 }
 
 .react-calendar-heatmap .color-scale-4 {
-  fill: #312e81; /* Darkest green for full attendance */
+  fill: #3b0764; /* Darkest - full attendance */
 }
-
 .react-calendar-heatmap .react-calendar-heatmap {
   width: 100%; /* Ensure full-width display */
 }
