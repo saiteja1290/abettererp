@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 export default function AttendanceLeaderboard() {
@@ -112,9 +111,6 @@ export default function AttendanceLeaderboard() {
 
                     </Table>
                 </CardContent>
-                <CardFooter>
-                    <Button onClick={handleLogout}>Logout</Button>
-                </CardFooter>
             </Card>
         </>
     )
