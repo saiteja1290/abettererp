@@ -65,6 +65,7 @@ export default function Home() {
                 Available for CSE, CSM and CET only for now.
               </p>
 
+
               {/* Terms and Conditions Checkbox */}
               <div className="flex items-center space-x-2">
                 <Checkbox
@@ -93,6 +94,9 @@ export default function Home() {
                   'Login'
                 )}
               </Button>
+              <p className="text-center text-gray-400 text-xs">
+                Data inside is purely guessed and should not be taken seriously
+              </p>
             </form>
           </CardContent>
         </Card>
