@@ -29,7 +29,7 @@ export default function AttendanceLeaderboard() {
         let section = ""
         if (stringStoredRollNumber.includes("748")) {
             section = "CSM"
-        } else if (stringStoredRollNumber.includes("749")) {
+        } else if (stringStoredRollNumber.includes("729")) {
             section = "CSE 5"
         } else if (160121733001 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733065 || 160121733301 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733306) {
             section = "CSE 1"
