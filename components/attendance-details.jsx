@@ -81,7 +81,7 @@ export default function AttendanceDetails() {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                {userattendance >= 76 ? "Classes You Can Skip" : "Classes to Attend"}
+                                {userattendance >= 76 ? "Classes You Can Skip for 76%" : "Classes to Attend for 76%"}
                             </TableCell>
                             <TableCell className="text-right">
                                 {/* "Classes You Can Skip or attend for 76%" */}
