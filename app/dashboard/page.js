@@ -55,6 +55,9 @@ export default function Dashboard() {
 
     return (
         <div className="container mx-auto py-10 px-4 md:px-0">
+            <p className="text-center text-gray-400 text-xs">
+                Data is purely guessed and should not be taken seriously
+            </p>
             <div className="flex flex-col md:flex-row gap-8">
                 {/* Left Section: Attendance Details */}
                 <div className="w-full md:w-1/2 order-2 md:order-1 p-4 rounded-lg">
