@@ -58,11 +58,6 @@ export default function AnomalyDetection() {
         return attendanceString.includes("A") && attendanceString.includes("P");
     };
 
-    const getAttendancePercentage = (attendance) => {
-        const present = (attendance.match(/P/g) || []).length;
-        return ((present / attendance.length) * 100).toFixed(1);
-    };
-
     const formatDate = (dateString) => {
         // Assuming dateString is in format "DD/MM/YYYY" or similar
         const parts = dateString.split("/");
@@ -113,7 +108,7 @@ export default function AnomalyDetection() {
                 <div className="flex items-center gap-2">
                     {/* <UserCircle className="w-8 h-8 text-primary" /> */}
                     <div>
-                        <CardTitle>Attendance Analysis (previous 3 days)</CardTitle>
+                        <CardTitle>Attendance Anamolies (previous 3 days)</CardTitle>
                         <CardDescription>Roll Number: {rollNumber}</CardDescription>
                     </div>
                 </div>
