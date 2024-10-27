@@ -47,7 +47,7 @@ export default function AttendancePieChart() {
                     config={{
                         attendance: {
                             label: "Attendance",
-                            color: "#7e22ce",
+                            color: attendance < 75 ? "#f44336" : "#22c55e",
                         },
                     }}
                     className="aspect-square w-full max-w-[300px] mx-auto"
@@ -79,7 +79,7 @@ export default function AttendancePieChart() {
                             dominantBaseline="middle"
                             className="fill-foreground text-3xl font-bold"
                         >
-                            {attendance.toFixed(1)}%
+                            {attendance.toFixed(2)}%
                         </text>
                     </RadialBarChart>
                 </ChartContainer>

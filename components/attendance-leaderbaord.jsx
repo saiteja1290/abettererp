@@ -35,7 +35,14 @@ export default function AttendanceLeaderboard() {
             section = "CSE 1"
         } else if (160121733071 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733134 || 160121733307 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733313) {
             section = "CSE 2"
-        } else {
+        }
+        else if (160121771001 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771064 || 160121771301 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771306) {
+            section = "AIDS1"
+        }
+        else if (160121771071 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771133 || 160121771307 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771313) {
+            section = "AIDS2"
+        }
+        else {
             section = "CSE 3"
         }
 

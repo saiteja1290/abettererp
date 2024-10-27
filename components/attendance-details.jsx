@@ -6,12 +6,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-export default function AttendanceDetails() {
+export default function AttendanceDetails(attendanceData2) {
     const [attendanceData, setAttendanceData] = useState({
         currentClasses: 0,
         classesHeld: 0,
         bunkableClasses: 0,
-        attendancepercentage: 0
+        attendancepercentage: 0,
+        name: ''
     })
     const [userattendance, setUserAttendance] = useState(0)
     const [rollNumber, setRollNumber] = useState('')
@@ -33,6 +34,7 @@ export default function AttendanceDetails() {
                     currentClasses: data.currentclasses,
                     classesHeld: data.classesheld,
                     bunkableClasses: bunkable,
+                    name: data.name
                 })
             })
             .catch(error => {
@@ -55,12 +57,13 @@ export default function AttendanceDetails() {
         localStorage.removeItem('rollNumber')
         router.push('/')
     }
-
+    console.log(attendanceData2)
     return (
         <Card className="h-full border-background">
             <CardHeader>
                 <CardTitle>Attendance Details (BETA)</CardTitle>
                 <CardDescription>Roll Number: {rollNumber}</CardDescription>
+                <CardDescription>Name: {attendanceData.name.slice(8, -17)}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Table>

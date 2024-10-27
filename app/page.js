@@ -62,7 +62,7 @@ export default function Home() {
 
               {/* Message for Section Limitation */}
               <p className="text-center text-gray-400 text-sm">
-                Available for CSE, CSM and CET only for now.
+                Available for 4th year CSE, CSM, AIML, AIDS.
               </p>
 
 

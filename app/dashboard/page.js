@@ -6,6 +6,7 @@ import AttendanceDetails from '@/components/attendance-details';
 import AttendancePieChart from '@/components/attendance-pie-chart';
 import AttendanceHeatmap from '@/components/attendance-heatmap';
 import Attendanceleaderboard from '@/components/attendance-leaderbaord';
+import AnamolyDetection from '@/components/anamoly-detection';
 export default function Dashboard() {
     const [attendanceData, setAttendanceData] = useState({
         attendancePercentage: 0,
@@ -67,6 +68,7 @@ export default function Dashboard() {
                     />
                 </div>
 
+
                 {/* Right Section: Pie Chart */}
                 <div className="w-full md:w-1/2 order-1 md:order-2 p-4  rounded-lg">
                     <AttendancePieChart
@@ -74,7 +76,15 @@ export default function Dashboard() {
                         rollNumber={attendanceData.rollNumber}
                     />
                 </div>
+                <div className="w-full md:w-1/2 order-3 md:order-1 p-4 rounded-lg">
+                    <AnamolyDetection
+                        attendanceData={attendanceData}
+                        handleLogout={handleLogout}
+                    />
+                </div>
+
             </div>
+
             <div className="w-full mt-8 p-4 shadow rounded-lg">
                 <Attendanceleaderboard
                     rollNumber={attendanceData.rollNumber}
