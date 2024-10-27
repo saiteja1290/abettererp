@@ -109,7 +109,8 @@ export default function AnomalyDetection() {
                     {/* <UserCircle className="w-8 h-8 text-primary" /> */}
                     <div>
                         <CardTitle>Attendance Anamolies (previous 3 days)</CardTitle>
-                        <CardDescription>Roll Number: {rollNumber}</CardDescription>
+                        {/* <CardDescription>Roll Number: {rollNumber}</CardDescription> */}
+                        <CardDescription>Ask your teachers attendance for which you were marked absent on the present days</CardDescription>
                     </div>
                 </div>
             </CardHeader>
