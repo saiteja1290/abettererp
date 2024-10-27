@@ -57,7 +57,7 @@ export default function AttendanceDetails(attendanceData2) {
         localStorage.removeItem('rollNumber')
         router.push('/')
     }
-    console.log(attendanceData2)
+    // console.log(attendanceData2)
     return (
         <Card className="h-full border-background">
             <CardHeader>
