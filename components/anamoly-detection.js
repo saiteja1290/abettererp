@@ -143,7 +143,7 @@ export default function AnomalyDetection() {
                                     <TableRow key={date} className="hover:bg-muted/50">
                                         <TableCell className="font-medium">{formatDate(date)}</TableCell>
                                         {attendance.split("").map((status, index) => (
-                                            <TableCell key={index} className="px-2">
+                                            <TableCell key={index} className="px-1">
                                                 <Badge
                                                     variant={status === "P" ? "outline" : "secondary"}
                                                     className={

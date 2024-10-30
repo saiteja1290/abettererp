@@ -30,7 +30,7 @@ export default function AttendanceLeaderboard() {
         if (stringStoredRollNumber.includes("748")) {
             section = "CSM"
         } else if (stringStoredRollNumber.includes("729")) {
-            section = "CSE 5"
+            section = "AIML"
         } else if (160121733001 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733065 || 160121733301 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733306) {
             section = "CSE 1"
         } else if (160121733071 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733134 || 160121733307 <= stringStoredRollNumber && stringStoredRollNumber <= 160121733313) {
@@ -41,6 +41,9 @@ export default function AttendanceLeaderboard() {
         }
         else if (160121771071 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771133 || 160121771307 <= stringStoredRollNumber && stringStoredRollNumber <= 160121771313) {
             section = "AIDS2"
+        }
+        else if (160121749001 <= stringStoredRollNumber && stringStoredRollNumber <= 160121749065 || 160121749301 <= stringStoredRollNumber && stringStoredRollNumber <= 160121749306) {
+            section = "CSE5"
         }
         else {
             section = "CSE 3"
