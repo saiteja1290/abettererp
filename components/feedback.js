@@ -67,13 +67,13 @@ export default function FeedbackForm() {
     };
 
     return (
-        <Card className="max-w-lg mx-auto mt-8">
+        <Card className="max-w-lg mx-auto mt-8 border-none">
             <CardHeader>
-                <CardTitle>Submit Your Ideas for the Project</CardTitle>
+                <CardTitle>Got Ideas for a feature?</CardTitle>
             </CardHeader>
             <CardContent>
                 {submitted ? (
-                    <Alert variant="success" className="mb-4">
+                    <Alert variant="success" className="mb-4 border-none">
                         <AlertTitle>Thank You!</AlertTitle>
                         <AlertDescription>
                             Your idea has been submitted successfully.
