@@ -6,6 +6,7 @@ import AttendanceDetails from '@/components/attendance-details';
 import AttendancePieChart from '@/components/attendance-pie-chart';
 import Attendanceleaderboard from '@/components/attendance-leaderbaord';
 import AnamolyDetection from '@/components/anamoly-detection';
+import FeedbackForm from '@/components/feedback';
 export default function Dashboard() {
     const [attendanceData, setAttendanceData] = useState({
         attendancePercentage: 0,
@@ -54,7 +55,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="container mx-auto py-10 px-4 md:px-0">
+        <div className="container mx-auto py-10 px-4 md:px-0 ">
             <p className="text-center text-gray-400 text-xs">
                 Data is purely guessed and should not be taken seriously
             </p>
@@ -88,6 +89,10 @@ export default function Dashboard() {
                 <Attendanceleaderboard
                     rollNumber={attendanceData.rollNumber}
                 />
+            </div>
+            <div>
+
+                <FeedbackForm />
             </div>
         </div>
     );
