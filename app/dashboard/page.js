@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AttendanceDetails from '@/components/attendance-details';
 import AttendancePieChart from '@/components/attendance-pie-chart';
-import AttendanceHeatmap from '@/components/attendance-heatmap';
 import Attendanceleaderboard from '@/components/attendance-leaderbaord';
 import AnamolyDetection from '@/components/anamoly-detection';
 export default function Dashboard() {
@@ -90,14 +89,6 @@ export default function Dashboard() {
                     rollNumber={attendanceData.rollNumber}
                 />
             </div>
-            {/* Full Width Section: Attendance Heatmap */}
-            <div className="w-full mt-8 p-4 shadow rounded-lg">
-                <AttendanceHeatmap
-                    rollNumber={attendanceData.rollNumber}
-                />
-            </div>
-
-
         </div>
     );
 }

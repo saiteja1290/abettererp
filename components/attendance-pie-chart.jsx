@@ -30,6 +30,12 @@ export default function AttendancePieChart() {
             })
     }, [router])
 
+    // Default color for attendance chart
+    let chartColor = attendance < 75 ? "#f44336" : "#22c55e"
+    if (rollNumber === '160121748022') {
+        chartColor = '#c084fc'
+    }
+
     const chartData = [
         {
             attendance: attendance,
@@ -47,7 +53,7 @@ export default function AttendancePieChart() {
                     config={{
                         attendance: {
                             label: "Attendance",
-                            color: attendance < 75 ? "#f44336" : "#22c55e",
+                            color: chartColor, // Use the dynamic color here
                         },
                     }}
                     className="aspect-square w-full max-w-[300px] mx-auto"
@@ -69,7 +75,7 @@ export default function AttendancePieChart() {
                             background
                             dataKey="attendance"
                             angleAxisId={0}
-                            fill="var(--color-attendance)"
+                            fill={chartColor} // Apply the dynamic color
                             cornerRadius={10}
                         />
                         <text

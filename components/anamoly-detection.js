@@ -20,12 +20,14 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, CheckCircle2, UserCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button"; // Import Button component
 
 export default function AnomalyDetection() {
     const [attendanceData, setAttendanceData] = useState({});
     const [rollNumber, setRollNumber] = useState("");
     const [loading, setLoading] = useState(true);
+    const [showFullReport, setShowFullReport] = useState(false); // State to toggle full report
     const router = useRouter();
 
     useEffect(() => {
@@ -50,38 +52,31 @@ export default function AnomalyDetection() {
         }
     };
 
-    const getPast3Days = (attendanceDict) => {
-        return Object.entries(attendanceDict).slice(0, 3);
-    };
-
     const checkForAnomalies = (attendanceString) => {
+        // Anomaly is defined as having both "A" (absent) and "P" (present)
         return attendanceString.includes("A") && attendanceString.includes("P");
     };
 
+    // Function to get day of the week from the date string
+    const getDayOfWeek = (dateString) => {
+        // Match everything inside parentheses (e.g., "(Fri)" in "11/1/2024(Fri)")
+        const dayMatch = dateString.match(/\((.*?)\)/);
+        return dayMatch ? dayMatch[1] : ""; // Return the day (e.g., "Fri") or empty string if not found
+    };
+
+    // Modify the formatDate function to display the date without the day inside parentheses
     const formatDate = (dateString) => {
-        // Assuming dateString is in format "DD/MM/YYYY" or similar
-        const parts = dateString.split("/");
+        const parts = dateString.split("(")[0].split("/"); // Extract date before parentheses
+        const dayOfWeek = getDayOfWeek(dateString); // Extract the day of the week from parentheses
         if (parts.length >= 2) {
-            return `${parts[0]}/${parts[1]}`; // Returns "DD/MM"
+            return `${parts[1]}/${parts[0]} (${dayOfWeek})`; // Returns "MM/DD (Day)"
         }
         return dateString;
     };
 
-    const StatusBadge = ({ status }) => {
-        if (status === "anomaly") {
-            return (
-                <Badge variant="destructive" className="gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    Anomaly
-                </Badge>
-            );
-        }
-        return (
-            <Badge variant="success" className="gap-1 bg-green-500 hover:bg-green-600">
-                <CheckCircle2 className="w-3 h-3" />
-                OK
-            </Badge>
-        );
+    // Get the past 3 days of attendance
+    const getPast3Days = (attendanceDict) => {
+        return Object.entries(attendanceDict).slice(0, 3);
     };
 
     if (loading) {
@@ -102,25 +97,38 @@ export default function AnomalyDetection() {
         );
     }
 
+    // Full anomaly data
+    const fullAnomalies = Object.entries(attendanceData).filter(([_, attendance]) =>
+        checkForAnomalies(attendance)
+    );
+
+    // Anomalies from the past 3 days
+    const past3DaysAnomalies = getPast3Days(attendanceData).filter(([_, attendance]) =>
+        checkForAnomalies(attendance)
+    );
+
+    // Decide which data to display: past 3 days or full report
+    const dataToDisplay = showFullReport ? fullAnomalies : past3DaysAnomalies;
+
     return (
         <Card className="w-full max-w-4xl mx-auto mt-8 border-none">
             <CardHeader className="pb-4">
                 <div className="flex items-center gap-2">
-                    {/* <UserCircle className="w-8 h-8 text-primary" /> */}
                     <div>
-                        <CardTitle>Attendance Anamolies (previous 3 days)</CardTitle>
-                        {/* <CardDescription>Roll Number: {rollNumber}</CardDescription> */}
-                        <CardDescription>Ask your teachers attendance for which you were marked absent on the present days</CardDescription>
+                        <CardTitle>Attendance Anomalies</CardTitle>
+                        <CardDescription>
+                            Ask your teachers about attendance for which you were marked absent on the days you were present.
+                        </CardDescription>
                     </div>
                 </div>
             </CardHeader>
             <CardContent>
-                {Object.keys(attendanceData).length === 0 ? (
+                {dataToDisplay.length === 0 ? (
                     <Alert variant="destructive">
                         <AlertCircle className="h-4 w-4" />
-                        <AlertTitle>No Data Available</AlertTitle>
+                        <AlertTitle>No Anomalies Found</AlertTitle>
                         <AlertDescription>
-                            No attendance records were found for this roll number.
+                            There are no anomalies in the attendance records for this roll number.
                         </AlertDescription>
                     </Alert>
                 ) : (
@@ -135,11 +143,10 @@ export default function AnomalyDetection() {
                                     <TableHead>4</TableHead>
                                     <TableHead>5</TableHead>
                                     <TableHead>6</TableHead>
-                                    <TableHead>Status</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {getPast3Days(attendanceData).map(([date, attendance]) => (
+                                {dataToDisplay.map(([date, attendance]) => (
                                     <TableRow key={date} className="hover:bg-muted/50">
                                         <TableCell className="font-medium">{formatDate(date)}</TableCell>
                                         {attendance.split("").map((status, index) => (
@@ -156,20 +163,23 @@ export default function AnomalyDetection() {
                                                 </Badge>
                                             </TableCell>
                                         ))}
-                                        <TableCell>
-                                            <StatusBadge
-                                                status={checkForAnomalies(attendance) ? "anomaly" : "normal"}
-                                            />
-                                        </TableCell>
-
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
-
-
                     </div>
                 )}
+            </CardContent>
+
+            {/* Button to toggle between past 3 days and full report */}
+            <CardContent className="pt-4">
+                <Button
+                    onClick={() => setShowFullReport(!showFullReport)}
+                    variant="outline"
+                    className="w-full"
+                >
+                    {showFullReport ? "Show Last 3 Days" : "Get Full Anomaly Report"}
+                </Button>
             </CardContent>
         </Card>
     );
